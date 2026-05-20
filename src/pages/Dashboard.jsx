@@ -8,10 +8,11 @@ const Dashboard = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="animate-fade-in" style={{ display: 'grid', gridTemplateColumns: 'repeat(12, 1fr)', gap: '32px' }}>
+  return (
+    <div className="animate-fade-in grid-cols-12">
       
       {/* Header spanning all 12 columns */}
-      <div style={{ gridColumn: 'span 12', display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
+      <div className="col-span-12" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
         <div>
           <h1 className="serif-heading" style={{ fontSize: '32px', marginBottom: '8px' }}>Welcome back, Student</h1>
           <p style={{ color: 'var(--text-muted)' }}>Ready to boost your academic vocabulary today?</p>
@@ -27,7 +28,7 @@ const Dashboard = () => {
       </div>
 
       {/* Stats row - 4 cards, each spanning 3 columns */}
-      <div className="card" style={{ gridColumn: 'span 3', display: 'flex', flexDirection: 'column', gap: '16px', border: '1px solid var(--border)' }}>
+      <div className="card col-span-3" style={{ display: 'flex', flexDirection: 'column', gap: '16px', border: '1px solid var(--border)' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <h3 style={{ fontSize: '14px', color: 'var(--text-muted)', fontWeight: 600 }}>Today's Goal</h3>
           <Target size={20} color="var(--primary)" />
@@ -41,7 +42,7 @@ const Dashboard = () => {
         </div>
       </div>
 
-      <div className="card" style={{ gridColumn: 'span 3', display: 'flex', flexDirection: 'column', gap: '16px', border: '1px solid var(--border)' }}>
+      <div className="card col-span-3" style={{ display: 'flex', flexDirection: 'column', gap: '16px', border: '1px solid var(--border)' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <h3 style={{ fontSize: '14px', color: 'var(--text-muted)', fontWeight: 600 }}>Current Streak</h3>
           <Flame size={20} color="#ef4444" />
@@ -53,7 +54,7 @@ const Dashboard = () => {
         <p style={{ fontSize: '12px', color: 'var(--text-light)', margin: 0 }}>Keep the momentum going!</p>
       </div>
 
-      <div className="card" style={{ gridColumn: 'span 3', display: 'flex', flexDirection: 'column', gap: '16px', border: '1px solid var(--border)' }}>
+      <div className="card col-span-3" style={{ display: 'flex', flexDirection: 'column', gap: '16px', border: '1px solid var(--border)' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <h3 style={{ fontSize: '14px', color: 'var(--text-muted)', fontWeight: 600 }}>Accuracy</h3>
           <CheckCircle size={20} color="var(--accent)" />
@@ -65,7 +66,7 @@ const Dashboard = () => {
         <p style={{ fontSize: '12px', color: '#ef4444', margin: 0 }}>Target: 80%</p>
       </div>
 
-      <div className="card" style={{ gridColumn: 'span 3', display: 'flex', flexDirection: 'column', gap: '16px', border: '1px solid var(--border)' }}>
+      <div className="card col-span-3" style={{ display: 'flex', flexDirection: 'column', gap: '16px', border: '1px solid var(--border)' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <h3 style={{ fontSize: '14px', color: 'var(--text-muted)', fontWeight: 600 }}>Total Learned</h3>
           <BookOpen size={20} color="#3b82f6" />
@@ -78,7 +79,7 @@ const Dashboard = () => {
       </div>
 
       {/* Main Banner - spanning 8 columns */}
-      <div className="card card-primary" style={{ gridColumn: 'span 8', display: 'flex', justifyContent: 'space-between', padding: '40px', minHeight: '280px', boxShadow: 'var(--shadow-lg)' }}>
+      <div className="card card-primary col-span-8" style={{ display: 'flex', justifyContent: 'space-between', padding: '40px', minHeight: '280px', boxShadow: 'var(--shadow-lg)', flexWrap: 'wrap', gap: '24px' }}>
         <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'flex-start' }}>
           <span className="badge badge-green" style={{ marginBottom: '24px' }}>⚡ Daily Challenge</span>
           <h2 className="serif-heading" style={{ color: 'white', fontSize: '36px', marginBottom: '24px' }}>Start Today's Quiz</h2>
@@ -106,7 +107,7 @@ const Dashboard = () => {
       </div>
 
       {/* Weekly Progress - spanning 4 columns */}
-      <div className="card" style={{ gridColumn: 'span 4', display: 'flex', flexDirection: 'column', minHeight: '280px', border: '1px solid var(--border)', boxShadow: 'var(--shadow-md)' }}>
+      <div className="card col-span-4" style={{ display: 'flex', flexDirection: 'column', minHeight: '280px', border: '1px solid var(--border)', boxShadow: 'var(--shadow-md)' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
           <h2 className="serif-heading" style={{ fontSize: '20px' }}>Weekly Progress</h2>
           <span style={{ color: 'var(--text-muted)', cursor: 'pointer' }}>•••</span>
@@ -137,14 +138,14 @@ const Dashboard = () => {
       </div>
 
       {/* Recently Saved Words - spanning 12 columns */}
-      <div className="card" style={{ gridColumn: 'span 12', padding: '40px', border: '1px solid var(--border)', boxShadow: 'var(--shadow-sm)' }}>
+      <div className="card col-span-12" style={{ padding: '40px', border: '1px solid var(--border)', boxShadow: 'var(--shadow-sm)' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '32px' }}>
            <h2 className="serif-heading" style={{ fontSize: '24px' }}>Recently Saved Words</h2>
            <span style={{ color: 'var(--primary)', fontWeight: 500, fontSize: '14px', cursor: 'pointer' }} onClick={() => navigate('/dictionary')}>View Dictionary</span>
         </div>
         
         {savedWords.length > 0 ? (
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '24px' }}>
+          <div className="grid-cols-3">
             {savedWords.slice(0, 3).map((word, i) => (
               <div key={i} style={{ padding: '24px', border: '1px solid var(--border)', borderRadius: '16px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
                 <h3 className="serif-heading" style={{ fontSize: '20px', textTransform: 'capitalize' }}>{word.word}</h3>
@@ -153,7 +154,7 @@ const Dashboard = () => {
             ))}
           </div>
         ) : (
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '24px' }}>
+          <div className="grid-cols-3">
              {[
                { word: 'Ambiguous', desc: 'Open to more than one interpretation...' },
                { word: 'Mitigate', desc: 'Make less severe, serious, or painful...' },

@@ -20,7 +20,7 @@ const Progress = () => {
         </div>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '24px', marginBottom: '32px' }}>
+      <div className="grid-cols-4" style={{ marginBottom: '32px' }}>
         <div className="card" style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
           <div style={{ width: '48px', height: '48px', backgroundColor: '#fff7ed', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <Flame size={24} color="#ea580c" />
@@ -63,7 +63,7 @@ const Progress = () => {
         </div>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '24px' }}>
+      <div className="layout-2fr-1fr">
         <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
           <div className="card" style={{ padding: '32px' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '40px' }}>

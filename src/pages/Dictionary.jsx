@@ -50,7 +50,7 @@ const Dictionary = () => {
         <div style={{ position: 'absolute', right: '20px', top: '50%', transform: 'translateY(-50%)', padding: '4px 8px', backgroundColor: 'var(--bg-color)', border: '1px solid var(--border)', borderRadius: '4px', fontSize: '12px', color: 'var(--text-muted)', fontWeight: 600 }}>⌘ K</div>
       </form>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '32px', marginBottom: '40px' }}>
+      <div className="layout-2fr-1fr" style={{ marginBottom: '40px' }}>
         <div className="card" style={{ minHeight: '400px', display: 'flex', flexDirection: 'column', alignItems: searchResult ? 'flex-start' : 'center', justifyContent: searchResult ? 'flex-start' : 'center', padding: '40px' }}>
           {!searchResult ? (
             <>
@@ -125,7 +125,7 @@ const Dictionary = () => {
           <h2 className="serif-heading" style={{ fontSize: '24px' }}>Trending Vocabulary</h2>
           <span style={{ color: 'var(--primary)', fontWeight: 600, fontSize: '14px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '4px' }}>Explore Collocations <ArrowRight size={16} /></span>
         </div>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '24px' }}>
+        <div className="grid-cols-3">
           {[
             { word: 'Sustainable', tag: 'HIGH FREQUENCY', color: 'badge-green', meaning: 'Able to be maintained at a certain rate or level...' },
             { word: 'Furthermore', tag: 'ESSAY CORE', color: 'badge-blue-light', meaning: 'In addition; used to introduce a fresh consideration in an...' },

@@ -54,7 +54,7 @@ const SavedWords = () => {
         </div>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '32px' }}>
+      <div className="layout-2fr-1fr">
         <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
           {savedWords.length === 0 ? (
             <div className="card" style={{ padding: '60px', textAlign: 'center' }}>

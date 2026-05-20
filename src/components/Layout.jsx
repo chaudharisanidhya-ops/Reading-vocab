@@ -2,15 +2,15 @@ import React from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
 import { LayoutDashboard, HelpCircle, Book, Bookmark, TrendingUp } from 'lucide-react';
 
-const Sidebar = () => {
-  const navItems = [
-    { name: 'Dashboard', path: '/', icon: <LayoutDashboard size={20} /> },
-    { name: 'Daily Quiz', path: '/quiz', icon: <HelpCircle size={20} /> },
-    { name: 'Dictionary', path: '/dictionary', icon: <Book size={20} /> },
-    { name: 'Saved Words', path: '/saved', icon: <Bookmark size={20} /> },
-    { name: 'Progress', path: '/progress', icon: <TrendingUp size={20} /> },
-  ];
+const navItems = [
+  { name: 'Dashboard', path: '/', icon: <LayoutDashboard size={20} /> },
+  { name: 'Daily Quiz', path: '/quiz', icon: <HelpCircle size={20} /> },
+  { name: 'Dictionary', path: '/dictionary', icon: <Book size={20} /> },
+  { name: 'Saved Words', path: '/saved', icon: <Bookmark size={20} /> },
+  { name: 'Progress', path: '/progress', icon: <TrendingUp size={20} /> },
+];
 
+const Sidebar = () => {
   return (
     <div className="sidebar" style={{ padding: '24px 0' }}>
       <div style={{ padding: '0 24px 32px' }}>
@@ -68,6 +68,29 @@ const Layout = () => {
           <Outlet />
         </div>
       </main>
+      
+      {/* Mobile Bottom Navigation */}
+      <nav className="mobile-nav">
+        {navItems.map((item) => (
+          <NavLink
+            key={item.path}
+            to={item.path}
+            style={({ isActive }) => ({
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              gap: '4px',
+              textDecoration: 'none',
+              color: isActive ? 'var(--primary)' : 'var(--text-muted)',
+              fontSize: '10px',
+              fontWeight: isActive ? 600 : 500,
+            })}
+          >
+            {item.icon}
+            {item.name}
+          </NavLink>
+        ))}
+      </nav>
     </div>
   );
 };

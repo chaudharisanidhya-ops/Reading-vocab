@@ -1,0 +1,229 @@
+[
+  {
+    "id": 1,
+    "word": "mitigate",
+    "meaning": "Make less severe, serious, or painful.",
+    "example": "Strict safety regulations were implemented to mitigate the risk of accidents.",
+    "collocations": [
+      "mitigate risk",
+      "mitigate impact",
+      "mitigate circumstances"
+    ],
+    "options": [
+      "increase",
+      "mitigate",
+      "promote",
+      "ignore"
+    ],
+    "correctIndex": 1,
+    "quizContext": "Health and Safety in the Workplace"
+  },
+  {
+    "id": 2,
+    "word": "comprehensive",
+    "meaning": "Complete; including all or nearly all elements or aspects of something.",
+    "example": "The committee published a comprehensive report on the environmental impact.",
+    "collocations": [
+      "comprehensive review",
+      "comprehensive report",
+      "comprehensive plan"
+    ],
+    "options": [
+      "limited",
+      "partial",
+      "comprehensive",
+      "exclusive"
+    ],
+    "correctIndex": 2,
+    "quizContext": "Academic Research and Reporting"
+  },
+  {
+    "id": 3,
+    "word": "facilitate",
+    "meaning": "Make an action or process easy or easier.",
+    "example": "The new software is designed to facilitate communication between departments.",
+    "collocations": [
+      "facilitate learning",
+      "facilitate growth",
+      "facilitate process"
+    ],
+    "options": [
+      "facilitate",
+      "hinder",
+      "collapse",
+      "refuse"
+    ],
+    "correctIndex": 0,
+    "quizContext": "Corporate Infrastructure"
+  },
+  {
+    "id": 4,
+    "word": "ambiguous",
+    "meaning": "Open to more than one interpretation; having a double meaning.",
+    "example": "The wording of the contract was ambiguous and led to disputes.",
+    "collocations": [
+      "ambiguous wording",
+      "ambiguous position",
+      "ambiguous relationship"
+    ],
+    "options": [
+      "clear",
+      "ambiguous",
+      "definite",
+      "precise"
+    ],
+    "correctIndex": 1,
+    "quizContext": "Legal and Contractual Documents"
+  },
+  {
+    "id": 5,
+    "word": "empirical",
+    "meaning": "Based on, concerned with, or verifiable by observation or experience rather than theory or pure logic.",
+    "example": "They provided empirical evidence to support their hypothesis.",
+    "collocations": [
+      "empirical evidence",
+      "empirical study",
+      "empirical research"
+    ],
+    "options": [
+      "theoretical",
+      "hypothetical",
+      "empirical",
+      "abstract"
+    ],
+    "correctIndex": 2,
+    "quizContext": "Scientific Research Methodology"
+  },
+  {
+    "id": 6,
+    "word": "sustainable",
+    "meaning": "Able to be maintained at a certain rate or level; conserving an ecological balance.",
+    "example": "The government is promoting sustainable energy solutions to combat climate change.",
+    "collocations": [
+      "sustainable development",
+      "sustainable agriculture",
+      "sustainable growth"
+    ],
+    "options": [
+      "depleting",
+      "sustainable",
+      "exhaustible",
+      "temporary"
+    ],
+    "correctIndex": 1,
+    "quizContext": "Environmental Policy"
+  },
+  {
+    "id": 7,
+    "word": "fluctuate",
+    "meaning": "Rise and fall irregularly in number or amount.",
+    "example": "Stock market prices tend to fluctuate based on global economic news.",
+    "collocations": [
+      "fluctuate wildly",
+      "prices fluctuate",
+      "temperatures fluctuate"
+    ],
+    "options": [
+      "stabilize",
+      "stagnate",
+      "fluctuate",
+      "persist"
+    ],
+    "correctIndex": 2,
+    "quizContext": "Economics and Finance"
+  },
+  {
+    "id": 8,
+    "word": "envisage",
+    "meaning": "Contemplate or conceive of as a possibility or a desirable future event.",
+    "example": "I cannot envisage a scenario where this strategy fails.",
+    "collocations": [
+      "envisage a future",
+      "envisage problems",
+      "hard to envisage"
+    ],
+    "options": [
+      "ignore",
+      "forget",
+      "dismiss",
+      "envisage"
+    ],
+    "correctIndex": 3,
+    "quizContext": "Strategic Planning"
+  },
+  {
+    "id": 9,
+    "word": "substantial",
+    "meaning": "Of considerable importance, size, or worth.",
+    "example": "The project requires a substantial investment of time and money.",
+    "collocations": [
+      "substantial amount",
+      "substantial evidence",
+      "substantial increase"
+    ],
+    "options": [
+      "insignificant",
+      "minimal",
+      "substantial",
+      "trivial"
+    ],
+    "correctIndex": 2,
+    "quizContext": "Project Management"
+  },
+  {
+    "id": 10,
+    "word": "collaborate",
+    "meaning": "Work jointly on an activity, especially to produce or create something.",
+    "example": "Researchers from multiple universities decided to collaborate on the project.",
+    "collocations": [
+      "collaborate closely",
+      "collaborate with",
+      "collaborate on"
+    ],
+    "options": [
+      "collaborate",
+      "compete",
+      "isolate",
+      "oppose"
+    ],
+    "correctIndex": 0,
+    "quizContext": "Academic Partnerships"
+  },
+  {
+    "id": 11,
+    "word": "hypothesis",
+    "meaning": "A supposition or proposed explanation made on the basis of limited evidence as a starting point for further investigation.",
+    "example": "The experiment was designed to test the initial hypothesis.",
+    "collocations": [
+      "test a hypothesis",
+      "formulate a hypothesis",
+      "support a hypothesis"
+    ],
+    "options": [
+      "fact",
+      "truth",
+      "hypothesis",
+      "certainty"
+    ],
+    "correctIndex": 2,
+    "quizContext": "Scientific Method"
+  },
+  {
+    "id": 12,
+    "word": "furthermore",
+    "meaning": "In addition; besides (used to introduce a fresh consideration in an argument).",
+    "example": "The cost is too high; furthermore, we do not have the necessary resources.",
+    "collocations": [
+      "used to transition",
+      "linking word"
+    ],
+    "options": [
+      "however",
+      "furthermore",
+      "although",
+      "despite"
+    ],
+    "correctIndex": 1,
+    "quizContext": "Argumentative Writing"
+  }
+]

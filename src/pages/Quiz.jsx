@@ -43,7 +43,7 @@ const Quiz = () => {
 
   return (
     <div className="animate-fade-in" style={{ maxWidth: '800px', margin: '0 auto' }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '32px' }}>
+      <div className="flex-mobile-col items-mobile-start" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '32px', gap: '16px' }}>
         <div>
           <p style={{ color: 'var(--text-muted)', fontSize: '14px', textTransform: 'uppercase', letterSpacing: '1px' }}>PTE Academic Vocabulary</p>
           <h1 className="serif-heading" style={{ fontSize: '32px', color: 'var(--primary)' }}>Daily Quiz Challenge</h1>
@@ -69,7 +69,7 @@ const Quiz = () => {
         </div>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px', marginBottom: '40px' }}>
+      <div className="grid-cols-2" style={{ marginBottom: '40px' }}>
         {currentQuestion.options.map((opt, idx) => (
           <button
             key={idx}
@@ -95,7 +95,7 @@ const Quiz = () => {
         ))}
       </div>
 
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+      <div className="flex-mobile-col items-mobile-start" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '24px' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--text-muted)' }}>
           <Clock size={20} />
           <span style={{ fontWeight: 500, color: timeLeft <= 10 ? '#ef4444' : 'inherit' }}>
@@ -103,8 +103,8 @@ const Quiz = () => {
           </span>
         </div>
         <button 
-          className="btn btn-primary" 
-          style={{ padding: '12px 32px', fontSize: '16px', display: 'flex', gap: '8px' }}
+          className="btn btn-primary w-full-mobile" 
+          style={{ padding: '12px 32px', fontSize: '16px', display: 'flex', gap: '8px', justifyContent: 'center' }}
           onClick={handleNext}
           disabled={selectedOption === null}
         >

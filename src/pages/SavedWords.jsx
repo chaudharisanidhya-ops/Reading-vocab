@@ -10,8 +10,8 @@ const SavedWords = () => {
 
   return (
     <div className="animate-fade-in">
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '32px' }}>
-        <div>
+      <div className="flex-mobile-col" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '32px', gap: '16px' }}>
+        <div className="w-full-mobile">
           <h1 className="serif-heading" style={{ fontSize: '32px', marginBottom: '8px' }}>Saved Vocabulary</h1>
           <p style={{ color: 'var(--text-muted)' }}>Review and master your difficult words.</p>
         </div>
@@ -24,8 +24,8 @@ const SavedWords = () => {
         </div>
       </div>
 
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '40px' }}>
-        <div style={{ display: 'flex', gap: '8px' }}>
+      <div className="flex-mobile-col" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '40px', gap: '16px' }}>
+        <div className="scroll-x-mobile w-full-mobile" style={{ display: 'flex', gap: '8px' }}>
           {['All', 'Easy', 'Medium', 'Hard'].map((f) => (
             <button 
               key={f}
@@ -44,7 +44,7 @@ const SavedWords = () => {
             </button>
           ))}
         </div>
-        <div style={{ position: 'relative', width: '300px' }}>
+        <div className="w-full-mobile" style={{ position: 'relative', width: '300px' }}>
           <Search size={18} style={{ position: 'absolute', left: '16px', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-light)' }} />
           <input 
             type="text" 
@@ -85,7 +85,7 @@ const SavedWords = () => {
                     <div style={{ height: '6px', backgroundColor: 'var(--border)', borderRadius: '3px' }}></div>
                   </div>
                   
-                  <div style={{ display: 'flex', gap: '16px' }}>
+                  <div className="flex-mobile-col" style={{ display: 'flex', gap: '16px' }}>
                     <button className="btn btn-primary" style={{ flex: 1, padding: '16px' }}>
                       <Book size={18} style={{ marginRight: '8px' }} /> Review Word
                     </button>

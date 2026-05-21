@@ -26,8 +26,8 @@ const Dictionary = () => {
 
   return (
     <div className="animate-fade-in">
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '32px' }}>
-        <div>
+      <div className="flex-mobile-col" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '32px', gap: '16px' }}>
+        <div className="w-full-mobile">
           <h1 className="serif-heading" style={{ fontSize: '32px', marginBottom: '8px' }}>Dictionary & Search</h1>
           <p style={{ color: 'var(--text-muted)' }}>Find PTE vocabulary meanings and usage.</p>
         </div>
@@ -62,7 +62,7 @@ const Dictionary = () => {
             </>
           ) : (
             <div style={{ width: '100%', animation: 'fadeIn 0.4s' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '24px' }}>
+              <div className="flex-mobile-col" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '24px', gap: '16px' }}>
                 <div>
                   <h2 className="serif-heading" style={{ fontSize: '32px', color: 'var(--primary)', textTransform: 'capitalize', marginBottom: '8px' }}>{searchResult.word}</h2>
                   <span className="badge badge-blue-light">{searchResult.quizContext}</span>
@@ -121,7 +121,7 @@ const Dictionary = () => {
       </div>
 
       <div>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
+        <div className="flex-mobile-col items-mobile-start" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px', gap: '16px' }}>
           <h2 className="serif-heading" style={{ fontSize: '24px' }}>Trending Vocabulary</h2>
           <span style={{ color: 'var(--primary)', fontWeight: 600, fontSize: '14px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '4px' }}>Explore Collocations <ArrowRight size={16} /></span>
         </div>

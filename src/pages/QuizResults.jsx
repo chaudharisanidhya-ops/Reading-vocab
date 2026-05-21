@@ -71,7 +71,7 @@ const QuizResults = () => {
       </div>
 
       <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-        <button className="btn btn-primary" onClick={() => navigate('/')} style={{ padding: '12px 32px' }}>
+        <button className="btn btn-primary w-full-mobile" onClick={() => navigate('/')} style={{ padding: '12px 32px' }}>
           Back to Dashboard <ArrowRight size={20} style={{ marginLeft: '8px' }} />
         </button>
       </div>

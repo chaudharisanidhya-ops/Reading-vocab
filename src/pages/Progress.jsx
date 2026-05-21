@@ -7,8 +7,8 @@ const Progress = () => {
 
   return (
     <div className="animate-fade-in">
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '40px' }}>
-        <div>
+      <div className="flex-mobile-col" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '40px', gap: '16px' }}>
+        <div className="w-full-mobile">
           <h1 className="serif-heading" style={{ fontSize: '32px', marginBottom: '8px', color: 'var(--primary)' }}>Your Learning Progress</h1>
           <p style={{ color: 'var(--text-muted)' }}>Track your journey to PTE reading mastery.</p>
         </div>
@@ -66,7 +66,7 @@ const Progress = () => {
       <div className="layout-2fr-1fr">
         <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
           <div className="card" style={{ padding: '32px' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '40px' }}>
+            <div className="flex-mobile-col items-mobile-start" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '40px', gap: '16px' }}>
               <h3 className="serif-heading" style={{ fontSize: '20px' }}>Weekly Activity</h3>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--text-muted)', fontSize: '14px', cursor: 'pointer' }}>
                 Last 7 Days <ChevronDown size={16} />

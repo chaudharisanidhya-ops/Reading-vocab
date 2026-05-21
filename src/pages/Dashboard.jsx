@@ -12,7 +12,7 @@ const Dashboard = () => {
     <div className="animate-fade-in grid-cols-12">
       
       {/* Header spanning all 12 columns */}
-      <div className="col-span-12" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
+      <div className="col-span-12 flex-mobile-col" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px', gap: '16px' }}>
         <div>
           <h1 className="serif-heading" style={{ fontSize: '32px', marginBottom: '8px' }}>Welcome back, Student</h1>
           <p style={{ color: 'var(--text-muted)' }}>Ready to boost your academic vocabulary today?</p>
@@ -100,7 +100,7 @@ const Dashboard = () => {
           <button className="btn btn-white" onClick={() => navigate('/quiz')} style={{ padding: '12px 32px', fontSize: '16px', boxShadow: '0 4px 6px rgba(0,0,0,0.1)' }}>Begin Practice</button>
         </div>
         <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}>
-          <div style={{ width: '220px', height: '220px', backgroundColor: 'rgba(255,255,255,0.05)', borderRadius: '24px', display: 'flex', alignItems: 'center', justifyContent: 'center', border: '1px solid rgba(255,255,255,0.1)' }}>
+          <div className="hidden-mobile" style={{ width: '220px', height: '220px', backgroundColor: 'rgba(255,255,255,0.05)', borderRadius: '24px', display: 'flex', alignItems: 'center', justifyContent: 'center', border: '1px solid rgba(255,255,255,0.1)' }}>
             <span style={{ fontSize: '80px', filter: 'drop-shadow(0 10px 15px rgba(0,0,0,0.2))' }}>🏆</span>
           </div>
         </div>
@@ -139,7 +139,7 @@ const Dashboard = () => {
 
       {/* Recently Saved Words - spanning 12 columns */}
       <div className="card col-span-12" style={{ padding: '40px', border: '1px solid var(--border)', boxShadow: 'var(--shadow-sm)' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '32px' }}>
+        <div className="flex-mobile-col" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '32px', gap: '16px' }}>
            <h2 className="serif-heading" style={{ fontSize: '24px' }}>Recently Saved Words</h2>
            <span style={{ color: 'var(--primary)', fontWeight: 500, fontSize: '14px', cursor: 'pointer' }} onClick={() => navigate('/dictionary')}>View Dictionary</span>
         </div>

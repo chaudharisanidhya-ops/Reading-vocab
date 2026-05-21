@@ -191,6 +191,11 @@ h1, h2, h3, h4, h5, h6 {
   grid-template-columns: repeat(3, 1fr);
   gap: 24px;
 }
+.grid-cols-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
 .layout-2fr-1fr {
   display: grid;
   grid-template-columns: 2fr 1fr;
@@ -201,6 +206,27 @@ h1, h2, h3, h4, h5, h6 {
 .col-span-8 { grid-column: span 8; }
 .col-span-4 { grid-column: span 4; }
 .col-span-3 { grid-column: span 3; }
+.col-span-2 { grid-column: span 2; }
+
+/* Responsive Flex Utilities */
+.flex-mobile-col {
+  display: flex;
+}
+.flex-mobile-col-reverse {
+  display: flex;
+}
+.items-mobile-start {
+  align-items: center;
+}
+.w-full-mobile {
+  width: auto;
+}
+.hidden-mobile {
+  display: block;
+}
+.scroll-x-mobile {
+  display: flex;
+}
 
 /* Mobile Navigation */
 .mobile-nav {
@@ -232,17 +258,35 @@ h1, h2, h3, h4, h5, h6 {
   .main-content {
     margin-left: 0;
     width: 100%;
-    padding-bottom: 70px; /* Space for bottom nav */
+    padding-bottom: 80px; /* Space for bottom nav */
   }
   .dashboard-container { padding: 16px; }
-  .mobile-nav { display: flex; }
+  .mobile-nav { 
+    display: flex; 
+    padding-bottom: calc(12px + env(safe-area-inset-bottom)); 
+  }
   
   .grid-cols-4 { grid-template-columns: 1fr; }
   .grid-cols-12 { display: flex; flex-direction: column; gap: 16px; }
   .grid-cols-3 { grid-template-columns: 1fr; }
+  .grid-cols-2 { grid-template-columns: 1fr; }
   
-  .col-span-12, .col-span-8, .col-span-4, .col-span-3 { grid-column: span 1; width: 100%; }
+  .col-span-12, .col-span-8, .col-span-4, .col-span-3, .col-span-2 { grid-column: span 1; width: 100%; }
   
-  .card { padding: 16px; }
-  .serif-heading { font-size: calc(100% - 20%); } /* Slightly scale down headings */
+  .card { padding: 16px !important; }
+  .serif-heading { font-size: calc(100% - 10%); }
+  
+  /* Flex Overrides for Mobile */
+  .flex-mobile-col { flex-direction: column; align-items: flex-start !important; }
+  .flex-mobile-col-reverse { flex-direction: column-reverse; align-items: flex-start !important; }
+  .items-mobile-start { align-items: flex-start !important; }
+  .w-full-mobile { width: 100% !important; }
+  .hidden-mobile { display: none !important; }
+  .scroll-x-mobile { 
+    overflow-x: auto; 
+    -webkit-overflow-scrolling: touch; 
+    padding-bottom: 8px; 
+    width: 100%; 
+  }
+  .scroll-x-mobile::-webkit-scrollbar { display: none; }
 }

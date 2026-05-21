@@ -8,7 +8,6 @@ const Dashboard = () => {
   const navigate = useNavigate();
 
   return (
-  return (
     <div className="animate-fade-in grid-cols-12">
       
       {/* Header spanning all 12 columns */}

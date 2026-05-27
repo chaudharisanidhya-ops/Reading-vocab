@@ -22,7 +22,7 @@ const Progress = () => {
 
       <div className="grid-cols-4" style={{ marginBottom: '32px' }}>
         <div className="card" style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-          <div style={{ width: '48px', height: '48px', backgroundColor: '#fff7ed', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <div style={{ width: '48px', height: '48px', backgroundColor: 'rgba(234, 88, 12, 0.15)', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <Flame size={24} color="#ea580c" />
           </div>
           <span style={{ fontSize: '14px', color: 'var(--text-muted)', fontWeight: 500 }}>Day Streak</span>
@@ -33,7 +33,7 @@ const Progress = () => {
         </div>
 
         <div className="card" style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-          <div style={{ width: '48px', height: '48px', backgroundColor: '#eff6ff', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <div style={{ width: '48px', height: '48px', backgroundColor: 'rgba(59, 130, 246, 0.15)', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <Target size={24} color="#3b82f6" />
           </div>
           <span style={{ fontSize: '14px', color: 'var(--text-muted)', fontWeight: 500 }}>Avg. Accuracy</span>
@@ -43,7 +43,7 @@ const Progress = () => {
         </div>
 
         <div className="card" style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-          <div style={{ width: '48px', height: '48px', backgroundColor: '#f5f3ff', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <div style={{ width: '48px', height: '48px', backgroundColor: 'rgba(139, 92, 246, 0.15)', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <BookA size={24} color="#8b5cf6" />
           </div>
           <span style={{ fontSize: '14px', color: 'var(--text-muted)', fontWeight: 500 }}>Words Practiced</span>
@@ -53,7 +53,7 @@ const Progress = () => {
         </div>
 
         <div className="card" style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-          <div style={{ width: '48px', height: '48px', backgroundColor: '#ecfdf5', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <div style={{ width: '48px', height: '48px', backgroundColor: 'rgba(16, 185, 129, 0.15)', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <BookMarked size={24} color="#10b981" />
           </div>
           <span style={{ fontSize: '14px', color: 'var(--text-muted)', fontWeight: 500 }}>In Revision</span>

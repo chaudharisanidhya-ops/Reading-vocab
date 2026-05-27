@@ -35,7 +35,7 @@ const SavedWords = () => {
                 borderRadius: '24px',
                 border: filter === f ? 'none' : '1px solid var(--border)',
                 backgroundColor: filter === f ? 'var(--primary)' : 'transparent',
-                color: filter === f ? 'white' : 'var(--text-main)',
+                color: filter === f ? '#181818' : 'var(--text-main)',
                 cursor: 'pointer',
                 fontWeight: 500
               }}
@@ -101,8 +101,8 @@ const SavedWords = () => {
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
           <div className="card" style={{ padding: '32px' }}>
-            <div style={{ width: '48px', height: '48px', backgroundColor: '#e0e7ff', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '24px' }}>
-              <Lightbulb size={24} color="#4f46e5" />
+            <div style={{ width: '48px', height: '48px', backgroundColor: 'var(--secondary)', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '24px' }}>
+              <Lightbulb size={24} color="var(--primary)" />
             </div>
             <h3 className="serif-heading" style={{ fontSize: '20px', marginBottom: '16px' }}>Daily Tip</h3>
             <p style={{ color: 'var(--text-muted)', fontSize: '14px', lineHeight: 1.6, marginBottom: '24px' }}>Words like "Comprehensive" often appear in PTE Reading Fill in the Blanks. Practice using it in sentences related to research or reporting.</p>
@@ -114,7 +114,7 @@ const SavedWords = () => {
           <div className="card card-primary" style={{ padding: '40px 32px' }}>
             <h3 className="serif-heading" style={{ fontSize: '24px', color: 'white', marginBottom: '16px' }}>Ready for a Quiz?</h3>
             <p style={{ color: 'rgba(255,255,255,0.8)', fontSize: '14px', lineHeight: 1.6, marginBottom: '32px' }}>Test your knowledge on 12 words you haven't reviewed this week.</p>
-            <button className="btn" style={{ backgroundColor: 'var(--accent)', color: 'white', width: 'auto', padding: '12px 24px' }}>Start Flashcards</button>
+            <button className="btn" style={{ backgroundColor: 'var(--accent)', color: '#181818', width: 'auto', padding: '12px 24px' }}>Start Flashcards</button>
           </div>
         </div>
       </div>

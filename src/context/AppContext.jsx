@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import vocabData from '../data/vocab.json';
+import vocabData from '../data/basic_vocab.json';
 
 const AppContext = createContext();
 

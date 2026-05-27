@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAppContext } from '../context/AppContext';
-import { HelpCircle, Clock, ArrowRight } from 'lucide-react';
+import { HelpCircle, Clock, ArrowRight, X, AlertCircle } from 'lucide-react';
 
 const Quiz = () => {
   const { dailyWords } = useAppContext();
@@ -39,78 +39,154 @@ const Quiz = () => {
     }
   };
 
-  if (!currentQuestion) return <div>Loading...</div>;
+  if (!currentQuestion) return (
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '60vh', gap: '16px' }}>
+      <div className="animate-spin" style={{ width: '40px', height: '40px', border: '4px solid var(--border)', borderTopColor: 'var(--primary)', borderRadius: '50%' }}></div>
+      <p style={{ color: 'var(--text-muted)' }}>Loading vocabulary challenge...</p>
+    </div>
+  );
 
   return (
-    <div className="animate-fade-in" style={{ maxWidth: '800px', margin: '0 auto' }}>
-      <div className="flex-mobile-col items-mobile-start" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '32px', gap: '16px' }}>
-        <div>
-          <p style={{ color: 'var(--text-muted)', fontSize: '14px', textTransform: 'uppercase', letterSpacing: '1px' }}>PTE Academic Vocabulary</p>
-          <h1 className="serif-heading" style={{ fontSize: '32px', color: 'var(--primary)' }}>Daily Quiz Challenge</h1>
+    <div className="animate-fade-in" style={{ maxWidth: '800px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '24px' }}>
+      
+      {/* Quiz Screen Header */}
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid var(--border)', paddingBottom: '16px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+          <button style={{ background: 'none', border: 'none', color: 'var(--text-muted)', cursor: 'pointer', display: 'flex', alignItems: 'center' }} onClick={() => navigate('/')}>
+            <X size={24} />
+          </button>
+          <div>
+            <span style={{ color: 'var(--primary)', fontSize: '12px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1.5px' }}>DAILY CHALLENGE</span>
+            <h1 className="serif-heading" style={{ fontSize: '24px', color: 'var(--text-main)', margin: '4px 0 0 0', fontWeight: 700 }}>Academic Quiz</h1>
+          </div>
         </div>
-        <div style={{ color: 'var(--text-muted)' }}>
-          Question <span style={{ fontWeight: 600, color: 'var(--text-main)' }}>{currentIndex + 1}</span> of 5
+        
+        {/* Progress Pill Indicator */}
+        <div style={{
+          backgroundColor: 'rgba(255, 255, 255, 0.05)',
+          border: '1px solid var(--border)',
+          borderRadius: '20px',
+          padding: '6px 16px',
+          fontSize: '13px',
+          color: 'var(--text-muted)',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '6px'
+        }}>
+          Question <span style={{ fontWeight: 700, color: 'var(--primary)' }}>{currentIndex + 1}</span> of 5
         </div>
       </div>
 
-      <div style={{ height: '6px', backgroundColor: 'var(--border)', borderRadius: '3px', marginBottom: '40px', overflow: 'hidden' }}>
-        <div style={{ height: '100%', width: `${((currentIndex) / 5) * 100}%`, backgroundColor: 'var(--accent)', transition: 'width 0.3s ease' }}></div>
+      {/* Modern thin horizontal progress gauge */}
+      <div style={{ height: '6px', backgroundColor: 'rgba(255,255,255,0.05)', borderRadius: '3px', overflow: 'hidden' }}>
+        <div style={{ height: '100%', width: `${((currentIndex + 1) / 5) * 100}%`, backgroundColor: 'var(--primary)', transition: 'width 0.4s cubic-bezier(0.16, 1, 0.3, 1)' }}></div>
       </div>
 
-      <div className="card" style={{ borderLeft: '4px solid var(--primary)', padding: '40px', marginBottom: '32px' }}>
-        <div style={{ display: 'flex', gap: '16px', marginBottom: '32px' }}>
-          <HelpCircle color="var(--primary)" size={24} style={{ flexShrink: 0, marginTop: '4px' }} />
-          <p style={{ fontSize: '20px', lineHeight: 1.6, color: 'var(--text-main)' }}>
-            "{currentQuestion.example.replace(currentQuestion.word, '_________')}"
+      {/* Main Question Card with elegant serif blank sentence */}
+      <div className="card" style={{ borderLeft: '4px solid var(--primary)', padding: '36px', backgroundColor: 'var(--surface)', display: 'flex', flexDirection: 'column', gap: '24px' }}>
+        <div style={{ display: 'flex', gap: '16px', alignItems: 'flex-start' }}>
+          <HelpCircle color="var(--primary)" size={26} style={{ flexShrink: 0, marginTop: '2px' }} />
+          <p className="serif-heading" style={{ fontSize: '20px', lineHeight: 1.6, color: 'var(--text-main)', fontStyle: 'italic', margin: 0 }}>
+            "{currentQuestion.example.replace(new RegExp(`\\b${currentQuestion.word}\\b`, 'gi'), '_________')}"
           </p>
         </div>
-        <div style={{ backgroundColor: '#f8fafc', padding: '16px', borderRadius: '8px', display: 'flex', gap: '12px', alignItems: 'center' }}>
-           <span style={{ color: 'var(--text-muted)', fontSize: '14px' }}>ⓘ Context: <span style={{ fontStyle: 'italic' }}>{currentQuestion.quizContext}</span></span>
-        </div>
-      </div>
-
-      <div className="grid-cols-2" style={{ marginBottom: '40px' }}>
-        {currentQuestion.options.map((opt, idx) => (
-          <button
-            key={idx}
-            className="card"
-            style={{
-              padding: '24px',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '16px',
-              cursor: 'pointer',
-              border: selectedOption === idx ? '2px solid var(--primary)' : '1px solid var(--border)',
-              backgroundColor: selectedOption === idx ? 'var(--secondary)' : 'var(--surface)',
-              transition: 'all 0.2s',
-              textAlign: 'left'
-            }}
-            onClick={() => setSelectedOption(idx)}
-          >
-            <div style={{ width: '32px', height: '32px', borderRadius: '4px', backgroundColor: selectedOption === idx ? 'var(--primary)' : '#f1f5f9', color: selectedOption === idx ? 'white' : 'var(--text-muted)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 600 }}>
-              {String.fromCharCode(65 + idx)}
-            </div>
-            <span style={{ fontSize: '16px', fontWeight: 500 }}>{opt}</span>
-          </button>
-        ))}
-      </div>
-
-      <div className="flex-mobile-col items-mobile-start" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '24px' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--text-muted)' }}>
-          <Clock size={20} />
-          <span style={{ fontWeight: 500, color: timeLeft <= 10 ? '#ef4444' : 'inherit' }}>
-            Time Remaining: 00:{timeLeft < 10 ? `0${timeLeft}` : timeLeft}
+        
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', backgroundColor: 'rgba(255, 255, 255, 0.02)', padding: '12px 18px', borderRadius: '10px', border: '1px solid var(--border)', alignSelf: 'flex-start' }}>
+          <AlertCircle size={16} color="var(--primary)" />
+          <span style={{ color: 'var(--text-muted)', fontSize: '13px', fontWeight: 500 }}>
+            PTE Context: <span style={{ color: 'var(--text-main)', fontStyle: 'normal', fontWeight: 600 }}>{currentQuestion.quizContext}</span>
           </span>
         </div>
+      </div>
+
+      {/* Interactive Options Stack / Grid */}
+      <div className="grid-cols-2" style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '16px' }}>
+        {currentQuestion.options.map((opt, idx) => {
+          const isSelected = selectedOption === idx;
+          return (
+            <button
+              key={idx}
+              className="option-button"
+              style={{
+                padding: '22px 24px',
+                borderRadius: '16px',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '16px',
+                cursor: 'pointer',
+                border: isSelected ? '2px solid var(--primary)' : '1px solid var(--border)',
+                backgroundColor: isSelected ? 'rgba(138, 180, 180, 0.12)' : '#222222',
+                transition: 'all 0.2s cubic-bezier(0.16, 1, 0.3, 1)',
+                textAlign: 'left',
+                outline: 'none',
+                position: 'relative'
+              }}
+              onClick={() => setSelectedOption(idx)}
+            >
+              {/* Styled Circular Option Badge A, B, C, D */}
+              <div style={{
+                width: '32px',
+                height: '32px',
+                borderRadius: '50%',
+                backgroundColor: isSelected ? 'var(--primary)' : 'rgba(255, 255, 255, 0.05)',
+                color: isSelected ? '#161616' : 'var(--text-muted)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontWeight: 700,
+                fontSize: '14px',
+                flexShrink: 0
+              }}>
+                {String.fromCharCode(65 + idx)}
+              </div>
+              
+              <span style={{ fontSize: '16px', fontWeight: 600, color: isSelected ? 'var(--primary)' : 'var(--text-main)', textTransform: 'capitalize' }}>
+                {opt}
+              </span>
+            </button>
+          );
+        })}
+      </div>
+
+      <style>{`
+        .option-button:hover {
+          background-color: var(--surface-hover) !important;
+          border-color: rgba(255, 255, 255, 0.15);
+          transform: translateY(-1px);
+        }
+      `}</style>
+
+      {/* Quiz Footer controls: Timer & Submit */}
+      <div className="flex-mobile-col items-mobile-start" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '20px', marginTop: '12px' }}>
+        
+        {/* Working Circular Timer Indicator */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px', color: 'var(--text-muted)' }}>
+          <Clock size={20} color={timeLeft <= 10 ? '#f87171' : 'var(--primary)'} />
+          <span style={{ fontWeight: 600, color: timeLeft <= 10 ? '#f87171' : 'var(--text-main)', fontSize: '15px' }}>
+            Time Remaining: <span style={{ fontFamily: 'monospace' }}>00:{timeLeft < 10 ? `0${timeLeft}` : timeLeft}</span>
+          </span>
+        </div>
+        
         <button 
           className="btn btn-primary w-full-mobile" 
-          style={{ padding: '12px 32px', fontSize: '16px', display: 'flex', gap: '8px', justifyContent: 'center' }}
+          style={{ 
+            padding: '14px 40px', 
+            fontSize: '16px', 
+            fontWeight: 700, 
+            display: 'flex', 
+            gap: '8px', 
+            justifyContent: 'center', 
+            borderRadius: '16px',
+            opacity: selectedOption === null ? 0.5 : 1,
+            cursor: selectedOption === null ? 'not-allowed' : 'pointer'
+          }}
           onClick={handleNext}
           disabled={selectedOption === null}
         >
           Check Answer <ArrowRight size={20} />
         </button>
       </div>
+
     </div>
   );
 };

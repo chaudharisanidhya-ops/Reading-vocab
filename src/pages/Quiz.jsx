@@ -23,35 +23,10 @@ const Quiz = () => {
 
   const currentQuestion = dailyWords[currentIndex];
 
-  // Dynamically generate stable multiple choice definition options where exactly one is the correct meaning
+  // Use the pre-generated MCQ options directly
   const optionsForQuestion = useMemo(() => {
-    if (!currentQuestion || !vocabData) return [];
-    
-    const correctMeaning = currentQuestion.meaning;
-    
-    // Choose 3 distinct other meanings from vocabData
-    const otherMeanings = [];
-    const pool = vocabData.filter(v => v.word.toLowerCase() !== currentQuestion.word.toLowerCase());
-    
-    // Pseudo-random shuffle to pick 3 meanings
-    const shuffledPool = [...pool].sort(() => 0.5 - Math.random());
-    for (const item of shuffledPool) {
-      if (otherMeanings.length < 3) {
-        if (item.meaning && item.meaning !== correctMeaning && !otherMeanings.includes(item.meaning)) {
-          otherMeanings.push(item.meaning);
-        }
-      } else {
-        break;
-      }
-    }
-    
-    const combined = [
-      { meaning: correctMeaning, isCorrect: true },
-      ...otherMeanings.map(m => ({ meaning: m, isCorrect: false }))
-    ];
-    
-    return combined.sort(() => 0.5 - Math.random());
-  }, [currentIndex, currentQuestion, vocabData]);
+    return currentQuestion ? currentQuestion.options : [];
+  }, [currentQuestion]);
 
   // Stable state of whether the current word is saved
   const isWordSaved = useMemo(() => {
@@ -70,7 +45,7 @@ const Quiz = () => {
   };
 
   const handleNext = () => {
-    const isCorrect = optionsForQuestion[selectedOption]?.isCorrect === true;
+    const isCorrect = optionsForQuestion[selectedOption] === currentQuestion.answer;
     const newAnswers = [...answers, { word: currentQuestion, isCorrect, selectedOption }];
     
     if (currentIndex < 4) {
@@ -182,7 +157,7 @@ const Quiz = () => {
       </div>
 
       {/* Interactive Options Stack / Grid */}
-      <div className="grid-cols-2" style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '16px' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '16px' }}>
         {optionsForQuestion.map((opt, idx) => {
           const isSelected = selectedOption === idx;
           return (
@@ -190,7 +165,7 @@ const Quiz = () => {
               key={idx}
               className="option-button"
               style={{
-                padding: '22px 24px',
+                padding: '20px 24px',
                 borderRadius: '16px',
                 display: 'flex',
                 alignItems: 'center',
@@ -222,8 +197,8 @@ const Quiz = () => {
                 {String.fromCharCode(65 + idx)}
               </div>
               
-              <span style={{ fontSize: '14px', fontWeight: 600, color: isSelected ? 'var(--primary)' : 'var(--text-main)', lineHeight: 1.4 }}>
-                {opt.meaning}
+              <span style={{ fontSize: '15px', fontWeight: 600, color: isSelected ? 'var(--primary)' : 'var(--text-main)', lineHeight: 1.4, textTransform: 'capitalize' }}>
+                {opt}
               </span>
             </button>
           );

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useAppContext } from '../context/AppContext';
 import { CheckCircle, XCircle, ArrowRight, BookOpen } from 'lucide-react';
@@ -6,7 +6,7 @@ import { CheckCircle, XCircle, ArrowRight, BookOpen } from 'lucide-react';
 const QuizResults = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const { setUserStats } = useAppContext();
+  const { setUserStats, updateWordSRState } = useAppContext();
   const results = location.state?.results || [];
 
   const score = results.filter(r => r.isCorrect).length;
@@ -20,8 +20,23 @@ const QuizResults = () => {
         wordsPracticed: prev.wordsPracticed + 5,
         accuracy: Math.round(((prev.accuracy * prev.wordsPracticed) + (score / 5 * 100) * 5) / (prev.wordsPracticed + 5))
       }));
+
+      // Update Spaced Repetition states for all words in this quiz
+      results.forEach(res => {
+        updateWordSRState(res.word.word, res.isCorrect);
+      });
     }
   }, []);
+
+  // Select one word for the Example Sentence Spotlight (prioritize incorrect answers for learning reinforcement)
+  const spotlightItem = useMemo(() => {
+    if (results.length === 0) return null;
+    const incorrect = results.filter(r => !r.isCorrect);
+    if (incorrect.length > 0) {
+      return incorrect[Math.floor(Math.random() * incorrect.length)];
+    }
+    return results[Math.floor(Math.random() * results.length)];
+  }, [results]);
 
   if (results.length === 0) {
     return <div>No results found. <button onClick={() => navigate('/')}>Go Home</button></div>;
@@ -35,6 +50,69 @@ const QuizResults = () => {
           Score: {score} / 5
         </div>
       </div>
+
+      {/* Dynamic Example Sentence Spotlight Card */}
+      {spotlightItem && (
+        <div className="card animate-fade-in" style={{
+          background: 'linear-gradient(135deg, rgba(138, 180, 180, 0.1) 0%, rgba(34, 34, 34, 0.8) 100%)',
+          border: '1px solid rgba(138, 180, 180, 0.25)',
+          padding: '36px',
+          borderRadius: '24px',
+          marginBottom: '40px',
+          position: 'relative',
+          overflow: 'hidden',
+          boxShadow: 'var(--shadow-md)'
+        }}>
+          {/* Subtle background glow */}
+          <div style={{
+            position: 'absolute',
+            top: '-20px',
+            right: '-20px',
+            width: '120px',
+            height: '120px',
+            borderRadius: '50%',
+            backgroundColor: 'rgba(138, 180, 180, 0.08)',
+            filter: 'blur(30px)',
+            pointerEvents: 'none'
+          }}></div>
+
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--primary)', marginBottom: '16px' }}>
+            <BookOpen size={20} />
+            <span style={{ fontSize: '13px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1.5px' }}>
+              Daily Spotlight Example
+            </span>
+          </div>
+
+          <h2 className="serif-heading" style={{ fontSize: '32px', color: 'var(--primary)', margin: '0 0 16px 0', textTransform: 'capitalize', fontWeight: 700 }}>
+            {spotlightItem.word.word}
+          </h2>
+
+          <div style={{ height: '1px', backgroundColor: 'rgba(255, 255, 255, 0.08)', margin: '16px 0 24px' }}></div>
+
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+            <span style={{ color: 'var(--text-light)', fontSize: '11px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1px' }}>Contextual Sentence</span>
+            <p style={{
+              color: 'var(--text-main)',
+              fontStyle: 'italic',
+              margin: 0,
+              fontSize: '20px',
+              lineHeight: 1.6,
+              fontWeight: 500,
+              borderLeft: '3px solid var(--primary)',
+              paddingLeft: '20px'
+            }}>
+              "{spotlightItem.word.example}"
+            </p>
+          </div>
+
+          <div style={{ display: 'flex', gap: '24px', flexWrap: 'wrap', marginTop: '24px' }}>
+            <div>
+              <span style={{ color: 'var(--text-light)', fontSize: '11px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1px' }}>Definition</span>
+              <p style={{ color: 'var(--text-muted)', fontSize: '14px', margin: '4px 0 0 0' }}>{spotlightItem.word.meaning}</p>
+            </div>
+          </div>
+        </div>
+      )}
 
       <h2 className="serif-heading" style={{ fontSize: '24px', marginBottom: '24px' }}>Word Review</h2>
       

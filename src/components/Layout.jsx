@@ -5,9 +5,7 @@ import { LayoutDashboard, HelpCircle, Book, Bookmark, TrendingUp } from 'lucide-
 const navItems = [
   { name: 'Dashboard', path: '/', icon: <LayoutDashboard size={20} /> },
   { name: 'Daily Quiz', path: '/quiz', icon: <HelpCircle size={20} /> },
-  { name: 'Dictionary', path: '/dictionary', icon: <Book size={20} /> },
   { name: 'Saved Words', path: '/saved', icon: <Bookmark size={20} /> },
-  { name: 'Progress', path: '/progress', icon: <TrendingUp size={20} /> },
 ];
 
 const Sidebar = () => {

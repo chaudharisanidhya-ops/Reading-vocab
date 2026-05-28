@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAppContext } from '../context/AppContext';
-import { HelpCircle, Clock, ArrowRight, X, AlertCircle } from 'lucide-react';
+import { HelpCircle, Clock, ArrowRight, X, AlertCircle, Bookmark } from 'lucide-react';
 
 const Quiz = () => {
-  const { dailyWords } = useAppContext();
+  const { dailyWords, savedWords, toggleSaveWord, vocabData } = useAppContext();
   const navigate = useNavigate();
   
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -23,8 +23,54 @@ const Quiz = () => {
 
   const currentQuestion = dailyWords[currentIndex];
 
+  // Dynamically generate stable multiple choice definition options where exactly one is the correct meaning
+  const optionsForQuestion = useMemo(() => {
+    if (!currentQuestion || !vocabData) return [];
+    
+    const correctMeaning = currentQuestion.meaning;
+    
+    // Choose 3 distinct other meanings from vocabData
+    const otherMeanings = [];
+    const pool = vocabData.filter(v => v.word.toLowerCase() !== currentQuestion.word.toLowerCase());
+    
+    // Pseudo-random shuffle to pick 3 meanings
+    const shuffledPool = [...pool].sort(() => 0.5 - Math.random());
+    for (const item of shuffledPool) {
+      if (otherMeanings.length < 3) {
+        if (item.meaning && item.meaning !== correctMeaning && !otherMeanings.includes(item.meaning)) {
+          otherMeanings.push(item.meaning);
+        }
+      } else {
+        break;
+      }
+    }
+    
+    const combined = [
+      { meaning: correctMeaning, isCorrect: true },
+      ...otherMeanings.map(m => ({ meaning: m, isCorrect: false }))
+    ];
+    
+    return combined.sort(() => 0.5 - Math.random());
+  }, [currentIndex, currentQuestion, vocabData]);
+
+  // Stable state of whether the current word is saved
+  const isWordSaved = useMemo(() => {
+    if (!currentQuestion || !savedWords) return false;
+    return savedWords.some(w => w.word.toLowerCase() === currentQuestion.word.toLowerCase());
+  }, [currentQuestion, savedWords]);
+
+  const highlightWord = (sentence, word) => {
+    if (!sentence || !word) return '';
+    const parts = sentence.split(new RegExp(`\\b(${word})\\b`, 'gi'));
+    return parts.map((part, index) => 
+      part.toLowerCase() === word.toLowerCase() 
+        ? <span key={index} style={{ borderBottom: '2px dashed var(--primary)', fontWeight: 600, color: 'var(--text-main)', fontStyle: 'normal' }}>{part}</span>
+        : <span key={index}>{part}</span>
+    );
+  };
+
   const handleNext = () => {
-    const isCorrect = selectedOption === currentQuestion?.correctIndex;
+    const isCorrect = optionsForQuestion[selectedOption]?.isCorrect === true;
     const newAnswers = [...answers, { word: currentQuestion, isCorrect, selectedOption }];
     
     if (currentIndex < 4) {
@@ -82,12 +128,48 @@ const Quiz = () => {
         <div style={{ height: '100%', width: `${((currentIndex + 1) / 5) * 100}%`, backgroundColor: 'var(--primary)', transition: 'width 0.4s cubic-bezier(0.16, 1, 0.3, 1)' }}></div>
       </div>
 
-      {/* Main Question Card with elegant serif blank sentence */}
-      <div className="card" style={{ borderLeft: '4px solid var(--primary)', padding: '36px', backgroundColor: 'var(--surface)', display: 'flex', flexDirection: 'column', gap: '24px' }}>
-        <div style={{ display: 'flex', gap: '16px', alignItems: 'flex-start' }}>
-          <HelpCircle color="var(--primary)" size={26} style={{ flexShrink: 0, marginTop: '2px' }} />
-          <p className="serif-heading" style={{ fontSize: '20px', lineHeight: 1.6, color: 'var(--text-main)', fontStyle: 'italic', margin: 0 }}>
-            "{currentQuestion.example.replace(new RegExp(`\\b${currentQuestion.word}\\b`, 'gi'), '_________')}"
+      {/* Main Question Card presenting the word and a save/bookmark option */}
+      <div className="card" style={{ borderLeft: '4px solid var(--primary)', padding: '36px', backgroundColor: 'var(--surface)', display: 'flex', flexDirection: 'column', gap: '20px' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <div>
+            <span style={{ color: 'var(--text-light)', fontSize: '12px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1px' }}>Vocabulary Word</span>
+            <h2 className="serif-heading" style={{ fontSize: '32px', color: 'var(--primary)', margin: '4px 0 0 0', textTransform: 'capitalize', fontWeight: 700 }}>
+              {currentQuestion.word}
+            </h2>
+          </div>
+          
+          {/* Premium Save Word bookmark button */}
+          <button
+            onClick={() => toggleSaveWord(currentQuestion)}
+            style={{
+              background: isWordSaved ? 'var(--secondary)' : 'rgba(255, 255, 255, 0.05)',
+              border: isWordSaved ? '1px solid var(--primary)' : '1px solid var(--border)',
+              borderRadius: '12px',
+              width: '48px',
+              height: '48px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              cursor: 'pointer',
+              transition: 'all 0.2s cubic-bezier(0.16, 1, 0.3, 1)',
+              outline: 'none'
+            }}
+            title={isWordSaved ? "Saved" : "Save Word"}
+          >
+            <Bookmark 
+              size={22} 
+              fill={isWordSaved ? "var(--primary)" : "none"} 
+              color={isWordSaved ? "var(--primary)" : "var(--text-muted)"} 
+            />
+          </button>
+        </div>
+
+        <div style={{ height: '1px', backgroundColor: 'var(--border)', margin: '4px 0' }}></div>
+
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+          <span style={{ color: 'var(--text-light)', fontSize: '12px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1px' }}>Context & Usage Hint</span>
+          <p style={{ color: 'var(--text-main)', fontStyle: 'italic', margin: 0, fontSize: '16px', lineHeight: 1.5 }}>
+            "{highlightWord(currentQuestion.example, currentQuestion.word)}"
           </p>
         </div>
         
@@ -101,7 +183,7 @@ const Quiz = () => {
 
       {/* Interactive Options Stack / Grid */}
       <div className="grid-cols-2" style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '16px' }}>
-        {currentQuestion.options.map((opt, idx) => {
+        {optionsForQuestion.map((opt, idx) => {
           const isSelected = selectedOption === idx;
           return (
             <button
@@ -140,8 +222,8 @@ const Quiz = () => {
                 {String.fromCharCode(65 + idx)}
               </div>
               
-              <span style={{ fontSize: '16px', fontWeight: 600, color: isSelected ? 'var(--primary)' : 'var(--text-main)', textTransform: 'capitalize' }}>
-                {opt}
+              <span style={{ fontSize: '14px', fontWeight: 600, color: isSelected ? 'var(--primary)' : 'var(--text-main)', lineHeight: 1.4 }}>
+                {opt.meaning}
               </span>
             </button>
           );

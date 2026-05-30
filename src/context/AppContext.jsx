@@ -398,15 +398,23 @@ export const AppProvider = ({ children }) => {
       if (state.mastery <= 1) difficulty = 'easy';
       else if (state.mastery >= 3) difficulty = 'hard';
 
-      const correctAns = getSynonym(wordObj);
-      const tempBanned = [...activeBannedList, correctAns, wordObj.word.toLowerCase()];
+      let correctAns = '';
+      let shuffledOptions = [];
 
-      const d1 = getPartiallyRelatedWord(wordObj, allCandidates, tempBanned);
-      const d2 = getUnrelatedWord(wordObj, allCandidates, [...tempBanned, d1]);
-      const d3 = getConfusingAcademicWord(wordObj, allCandidates, [...tempBanned, d1, d2]);
+      if (wordObj.options && typeof wordObj.correctIndex === 'number' && wordObj.correctIndex >= 0) {
+        shuffledOptions = wordObj.options;
+        correctAns = wordObj.options[wordObj.correctIndex];
+      } else {
+        correctAns = getSynonym(wordObj);
+        const tempBanned = [...activeBannedList, correctAns, wordObj.word.toLowerCase()];
 
-      const rawOptions = [correctAns, d1, d2, d3];
-      const shuffledOptions = shuffleArray(rawOptions);
+        const d1 = getPartiallyRelatedWord(wordObj, allCandidates, tempBanned);
+        const d2 = getUnrelatedWord(wordObj, allCandidates, [...tempBanned, d1]);
+        const d3 = getConfusingAcademicWord(wordObj, allCandidates, [...tempBanned, d1, d2]);
+
+        const rawOptions = [correctAns, d1, d2, d3];
+        shuffledOptions = shuffleArray(rawOptions);
+      }
 
       selectedQuestions.push({
         ...wordObj,
@@ -417,7 +425,7 @@ export const AppProvider = ({ children }) => {
       });
 
       selectedWordsOnly.push(wordObj.word.toLowerCase());
-      activeBannedList.push(correctAns, d1, d2, d3);
+      activeBannedList.push(...shuffledOptions);
     }
 
     // Save history
